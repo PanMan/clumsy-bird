@@ -68,7 +68,7 @@ var BirdEntity = me.ObjectEntity.extend({
 
     this.parent(x, y, settings);
     this.alwaysUpdate = true;
-    this.gravity = 0.2;
+    this.gravity = 0.1;
     this.gravityForce = 0.01;
     this.maxAngleRotation = Number.prototype.degToRad(30);
     this.maxAngleRotationDown = Number.prototype.degToRad(90);
