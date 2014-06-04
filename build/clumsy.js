@@ -45,7 +45,8 @@ game.resources = [
 	 {name: "ground", type:"image", src: "data/img/ground.png"},
 	 {name: "gameover", type:"image", src: "data/img/gameover.png"},
 	 {name: "gameoverbg", type:"image", src: "data/img/gameoverbg.png"},
-	 {name: "hit", type:"image", src: "data/img/hit.png"},
+	 //{name: "hit", type:"image", src: "data/img/hit.png"},
+   {name: "hit", type:"image", src: "data/img/burger.png"},
 	 {name: "getready", type:"image", src: "data/img/getready.png"},
 	 {name: "new", type:"image", src: "data/img/new.png"},
 	 {name: "share", type:"image", src: "data/img/share.png"},
@@ -186,8 +187,8 @@ var PipeGenerator = me.Renderable.extend({
       var hitPos = posY - 100;
       var hit = new me.pool.pull("hit", this.posX, hitPos);
       pipe1.renderable.flipY();
-      me.game.world.addChild(pipe1, 10);
-      me.game.world.addChild(pipe2, 10);
+//      me.game.world.addChild(pipe1, 10);
+ //     me.game.world.addChild(pipe2, 10);
       me.game.world.addChild(hit, 11);
     }
     return true;
@@ -195,21 +196,22 @@ var PipeGenerator = me.Renderable.extend({
 
 });
 
+
 var HitEntity = me.ObjectEntity.extend({
   init: function(x, y) {
     var settings = {};
     settings.image = me.loader.getImage('hit');
-    settings.width = 148;
-    settings.height= 60;
-    settings.spritewidth = 148;
-    settings.spriteheight= 60;
+    settings.width = 150;//148;
+    settings.height= 76; //60;
+    settings.spritewidth =  150;//148;
+    settings.spriteheight= 76;//60;
 
     this.parent(x, y, settings);
     this.alwaysUpdate = true;
     this.gravity = 5;
     this.updateTime = false;
     this.type = 'hit';
-    this.renderable.alpha = 0;
+    //this.renderable.alpha = 0;
     this.ac = new me.Vector2d(-this.gravity, 0);
   },
 
@@ -330,16 +332,30 @@ var BackgroundLayer = me.ImageLayer.extend({
     width = 900;
     height = 600;
     ratio = 1;
+    this.pos.x=0;
     this.fixed = speed > 0 ? false : true;
+    this.accel = new me.Vector2d(2, 0);
+    //console.log('Fixed:'+this.fixed);
     // call parent constructor
+
     this.parent(name, width, height, image, z, ratio);
   },
 
   update: function() {
+    //console.log('UpdateBG:');
+
     if (!this.fixed) {
+      this.pos.add(this.accel);
+      if (this.pos.x < -this.width) {
+        this.pos.x = me.video.getWidth() - 10;
+      }
+      //if (this.pos.x==NaN) {this.pos.x=0;}
+      /*
       if (this.pos.x >= this.imagewidth - 1)
         this.pos.x = 0;
       this.pos.x += this.speed;
+      */
+      //console.log(this.pos.x);
     }
     return true;
   }
@@ -405,7 +421,7 @@ game.TitleScreen = me.ScreenObject.extend({
   onResetEvent: function() {
     me.audio.stop("theme");
     game.data.newHiScore = false;
-    me.game.world.addChild(new BackgroundLayer('bg', 1));
+    me.game.world.addChild(new BackgroundLayer('bg', 1,2));
 
     me.input.bindKey(me.input.KEY.ENTER, "enter", true);
         me.input.bindKey(me.input.KEY.SPACE, "enter", true);
@@ -464,7 +480,7 @@ game.TitleScreen = me.ScreenObject.extend({
 
 game.PlayScreen = me.ScreenObject.extend({
   init: function() {
-    me.audio.play("theme", true);
+    // ENABLE THEME MUSIC me.audio.play("theme", true);
     // lower audio volume on firefox browser
     var vol = me.device.ua.contains("Firefox") ? 0.3 : 0.5;
     me.audio.setVolume(vol);
@@ -473,7 +489,7 @@ game.PlayScreen = me.ScreenObject.extend({
 
   onResetEvent: function() {
     me.audio.stop("theme");
-    me.audio.play("theme", true);
+    // THEME AUDIO me.audio.play("theme", true);
 
     me.input.bindKey(me.input.KEY.SPACE, "fly", true);
     game.data.score = 0;
@@ -481,7 +497,7 @@ game.PlayScreen = me.ScreenObject.extend({
     game.data.start = false;
     game.data.newHiscore = false;
 
-    me.game.world.addChild(new BackgroundLayer('bg', 1));
+    me.game.world.addChild(new BackgroundLayer('bg', 1,2));
 
     this.ground = new TheGround();
     me.game.world.addChild(this.ground, 11);
@@ -563,7 +579,7 @@ game.GameOverScreen = me.ScreenObject.extend({
       gImageBoard
     ), 10);
 
-    me.game.world.addChild(new BackgroundLayer('bg', 1));
+    me.game.world.addChild(new BackgroundLayer('bg', 1,2));
     this.ground = new TheGround();
     me.game.world.addChild(this.ground, 11);
 
