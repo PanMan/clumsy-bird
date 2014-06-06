@@ -380,12 +380,13 @@ var Share = me.GUI_Object.extend({
   },
 
   onClick: function(event) {
-    var shareText = 'Just made ' + game.data.steps + ' steps on Clumsy Bird! Can you beat me? Try online here!';
-    var url = 'http://ellisonleao.github.io/clumsy-bird/';
+    var shareText ='Just ate ' + game.data.steps + ' burgers on Burgerfest! Got the munchies? Play the burger game';
+     
+    var url = 'http://burgerfest.nl/';
     FB.ui(
       {
        method: 'feed',
-       name: 'My Clumsy Bird Score!',
+       name: 'Burgerfest',
        caption: "Share to your friends",
        description: (
           shareText
@@ -411,10 +412,11 @@ var Tweet = me.GUI_Object.extend({
   },
 
   onClick: function(event) {
-    var shareText = 'Just made ' + game.data.steps + ' steps on Clumsy Bird! Can you beat me? Try online here!';
-    var url = 'http://ellisonleao.github.io/clumsy-bird/';
-    var hashtags = 'clumsybird,melonjs'
-    window.open('https://twitter.com/intent/tweet?text=' + shareText + '&hashtags=' + hashtags + '&count=' + url + '&url=' + url, 'Tweet!', 'height=300,width=400')
+    var shareText = 'Just ate ' + game.data.steps + ' burgers on Burgerfest! Got the munchies? Play the burger game';
+    //"Just ate" .. "burgers on Burgerfest! Got the munchies? Click for free burgers!
+    var url = 'http://burgerfest.nl/';
+    var hashtags = 'burgerfest'
+    window.open('https://twitter.com/intent/tweet?text=' + shareText + '&related=czardigital&hashtags=' + hashtags + '&count=' + url + '&url=' + url, 'Tweet!', 'height=300,width=400')
     return false;
   }
 
