@@ -32,7 +32,7 @@ var game = {
     me.input.bindTouch(me.input.KEY.SPACE);
 
     me.pool.register("clumsy", BirdEntity);
-    me.pool.register("pipe", PipeEntity, true);
+    //me.pool.register("pipe", PipeEntity, true);
     me.pool.register("hit", HitEntity, true);
 
     // in melonJS 1.0.0, viewport size is set to Infinity by default
@@ -143,7 +143,7 @@ var BirdEntity = me.ObjectEntity.extend({
 
 });
 
-
+/*
 var PipeEntity = me.ObjectEntity.extend({
   init: function(x, y) {
     var settings = {};
@@ -170,6 +170,9 @@ var PipeEntity = me.ObjectEntity.extend({
   },
 
 });
+*/
+
+var hitfreq=92;
 
 var PipeGenerator = me.Renderable.extend({
   init: function() {
@@ -182,7 +185,8 @@ var PipeGenerator = me.Renderable.extend({
   },
 
   update: function(dt) {
-    if (this.generate++ % this.pipeFrequency == 0 ) {
+    //if (this.generate++ % this.pipeFrequency == 0 ) {
+      if (this.generate++ % hitfreq == 0 ) {
       var posY = Number.prototype.random(
           me.video.getHeight() - 100,
           200
@@ -611,12 +615,15 @@ game.GameOverScreen = me.ScreenObject.extend({
 
     // add the dialog witht he game information
     if (game.data.newHiScore) {
+      /* 
+      //New Highscore
       var newRect = new me.SpriteObject(
           235,
           355,
           me.loader.getImage('new')
       );
       me.game.world.addChild(newRect, 12);
+      */
     }
 
     this.dialog = new (me.Renderable.extend({
