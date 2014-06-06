@@ -46,7 +46,7 @@ game.resources = [
 	 {name: "gameover", type:"image", src: "data/img/gameover.png"},
 	 {name: "gameoverbg", type:"image", src: "data/img/gameoverbg.png"},
 	 //{name: "hit", type:"image", src: "data/img/hit.png"},
-   {name: "hit", type:"image", src: "data/img/burger.png"},
+   {name: "hit", type:"image", src: "data/img/hamburger.png"},
 	 {name: "getready", type:"image", src: "data/img/getready.png"},
 	 {name: "new", type:"image", src: "data/img/new.png"},
 	 {name: "share", type:"image", src: "data/img/share.png"},
@@ -176,7 +176,7 @@ var PipeGenerator = me.Renderable.extend({
   },
 
   update: function(dt) {
-    if (this.generate++ % this.pipeFrequency == 0) {
+    if (this.generate++ % this.pipeFrequency == 0 ) {
       var posY = Number.prototype.random(
           me.video.getHeight() - 100,
           200
@@ -201,10 +201,10 @@ var HitEntity = me.ObjectEntity.extend({
   init: function(x, y) {
     var settings = {};
     settings.image = me.loader.getImage('hit');
-    settings.width = 150;//148;
-    settings.height= 76; //60;
-    settings.spritewidth =  150;//148;
-    settings.spriteheight= 76;//60;
+    settings.width = 30;//148;
+    settings.height= 30; //60;
+    settings.spritewidth =  30;//148;
+    settings.spriteheight= 30;//60;
 
     this.parent(x, y, settings);
     this.alwaysUpdate = true;
