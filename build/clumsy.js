@@ -102,11 +102,11 @@ var BirdEntity = me.ObjectEntity.extend({
         this.flyTween.to({y: currentPos - 72}, 100);
         this.flyTween.start();
 
-        this.renderable.angle = -this.maxAngleRotation;
+        //this.renderable.angle = -this.maxAngleRotation;
       } else {
         this.gravityForce += 0.2;
         this.pos.y += me.timer.tick * this.gravityForce;
-        this.renderable.angle += Number.prototype.degToRad(3) * me.timer.tick;
+        //this.renderable.angle += Number.prototype.degToRad(3) * me.timer.tick;
         if (this.renderable.angle > this.maxAngleRotationDown)
           this.renderable.angle = this.maxAngleRotationDown;
       }
