@@ -20,11 +20,8 @@ var game = {
   },
 
   "loaded": function() {
-    console.log('Loaded');
-    me.event.subscribe("LOADER_COMPLETE", function (){
-  console.log("LOADER_COMPLETE");
-});
-
+    //console.log('Loaded');
+    
     me.state.set(me.state.MENU, new game.TitleScreen());
     me.state.set(me.state.PLAY, new game.PlayScreen());
     me.state.set(me.state.GAME_OVER, new game.GameOverScreen());
@@ -188,14 +185,14 @@ var PipeGenerator = me.Renderable.extend({
           me.video.getHeight() - 100,
           200
       );
-      var posY2 = posY - me.video.getHeight() - this.pipeHoleSize;
-      var pipe1 = new me.pool.pull("pipe", this.posX, posY);
-      var pipe2 = new me.pool.pull("pipe", this.posX, posY2);
+      //var posY2 = posY - me.video.getHeight() - this.pipeHoleSize;
+      //var pipe1 = new me.pool.pull("pipe", this.posX, posY);
+      //var pipe2 = new me.pool.pull("pipe", this.posX, posY2);
       var hitPos = posY - 100;
       var hit = new me.pool.pull("hit", this.posX, hitPos);
-      pipe1.renderable.flipY();
-//      me.game.world.addChild(pipe1, 10);
- //     me.game.world.addChild(pipe2, 10);
+      //pipe1.renderable.flipY();
+      //me.game.world.addChild(pipe1, 10);
+      //me.game.world.addChild(pipe2, 10);
       me.game.world.addChild(hit, 11);
     }
     return true;
@@ -427,7 +424,7 @@ game.TitleScreen = me.ScreenObject.extend({
   },
 
   onResetEvent: function() {
-    console.log('TitleScreen Reset');
+    //console.log('TitleScreen Reset');
     //Hide loading
     document.getElementById('loadingscreen').style.display = 'none';
     me.audio.stop("theme");
@@ -622,7 +619,7 @@ game.GameOverScreen = me.ScreenObject.extend({
           // size does not matter, it's just to avoid having a zero size
           // renderable
           this.parent(new me.Vector2d(), 100, 100);
-          this.font = new me.Font('gamefont', 40, 'black', 'left');
+          this.font = new me.Font('gamefont', 40, 'blue', 'left');
           this.steps = 'Steps: ' + game.data.steps.toString();
           this.topSteps= 'Higher Step: ' + me.save.topSteps.toString();
       },
