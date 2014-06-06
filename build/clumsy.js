@@ -23,7 +23,7 @@ var game = {
 
   "loaded": function() {
     //console.log('Loaded');
-    me.plugin.register(debugPanel, "debug"); //OWN
+    //me.plugin.register(debugPanel, "debug"); //OWN
     me.state.set(me.state.MENU, new game.TitleScreen());
     me.state.set(me.state.PLAY, new game.PlayScreen());
     me.state.set(me.state.GAME_OVER, new game.GameOverScreen());
@@ -66,10 +66,10 @@ var BirdEntity = me.ObjectEntity.extend({
   init: function(x, y) {
     var settings = {};
     settings.image = me.loader.getImage('clumsy');
-    settings.width = 264;
-    settings.height = 186;
-    settings.spritewidth = 264;
-    settings.spriteheight= 186;
+    settings.width = 167;
+    settings.height = 117;
+    settings.spritewidth = 167;
+    settings.spriteheight= 117;
 
     this.parent(x, y, settings);
     this.alwaysUpdate = true;
@@ -83,7 +83,7 @@ var BirdEntity = me.ObjectEntity.extend({
     this.animationController = 0;
     // manually add a rectangular collision shape
     //this.addShape(new me.Rect(new me.Vector2d(5, 5), 70, 50));
-    this.addShape(new me.Rect(new me.Vector2d(5, 5), 164, 186));
+    this.addShape(new me.Rect(new me.Vector2d(0, 0), 125, 100));
 
     // a tween object for the flying physic effect
     this.flyTween = new me.Tween(this.pos);
@@ -107,8 +107,8 @@ var BirdEntity = me.ObjectEntity.extend({
         this.gravityForce += 0.2;
         this.pos.y += me.timer.tick * this.gravityForce;
         //this.renderable.angle += Number.prototype.degToRad(3) * me.timer.tick;
-        if (this.renderable.angle > this.maxAngleRotationDown)
-          this.renderable.angle = this.maxAngleRotationDown;
+        //if (this.renderable.angle > this.maxAngleRotationDown)
+        //  this.renderable.angle = this.maxAngleRotationDown;
       }
     }
 
@@ -129,9 +129,11 @@ var BirdEntity = me.ObjectEntity.extend({
       me.audio.play('hit');
 
     } else {
-      var hitGround = me.game.viewport.height - (96 + 60);
-      var hitSky = -80; // bird height + 20px
+      var hitGround = me.game.viewport.height - (50 + 60); //(96 + 60);
+
+      var hitSky = -120; // bird height + 20px
       if (this.pos.y >= hitGround || this.pos.y <= hitSky) {
+        //console.log('HitGround (or sky)');
         me.state.change(me.state.GAME_OVER);
         return false;
       }
@@ -179,7 +181,7 @@ var PipeGenerator = me.Renderable.extend({
     this.parent(new me.Vector2d(), me.game.viewport.width, me.game.viewport.height);
     this.alwaysUpdate = true;
     this.generate = 0;
-    this.pipeFrequency = 92;
+    //this.pipeFrequency = 92;
     this.pipeHoleSize = 1240;
     this.posX = me.game.viewport.width;
   },
@@ -267,6 +269,11 @@ var TheGround = Object.extend({
     this.ground2 = new Ground(me.video.getWidth(), me.video.getHeight() - 96);
     me.game.world.addChild(this.ground1, 11);
     me.game.world.addChild(this.ground2, 11);
+
+    // manually add a rectangular collision shape
+    //Doesn't work
+    //this.addShape(new me.Rect(new me.Vector2d(0, 0), 900, 80));
+
   },
 
   update: function () { return true; }
@@ -440,7 +447,7 @@ game.TitleScreen = me.ScreenObject.extend({
     me.game.world.addChild(new BackgroundLayer('bg', 1,2));
 
     me.input.bindKey(me.input.KEY.ENTER, "enter", true);
-        me.input.bindKey(me.input.KEY.SPACE, "enter", true);
+    me.input.bindKey(me.input.KEY.SPACE, "enter", true);
     me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.ENTER);
 
     this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge) {
@@ -499,7 +506,7 @@ game.PlayScreen = me.ScreenObject.extend({
     // ENABLE THEME MUSIC 
     me.audio.play("theme", true);
     // lower audio volume on firefox browser
-    var vol = me.device.ua.contains("Firefox") ? 0.3 : 0.5;
+    var vol = me.device.ua.contains("Firefox") ? 0.5 : 0.75;
     me.audio.setVolume(vol);
     this.parent(this);
     //console.log('Game Init');
