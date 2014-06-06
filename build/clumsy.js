@@ -621,9 +621,9 @@ game.GameOverScreen = me.ScreenObject.extend({
           // size does not matter, it's just to avoid having a zero size
           // renderable
           this.parent(new me.Vector2d(), 100, 100);
-          this.font = new me.Font('gamefont', 40, 'blue', 'left');
-          this.steps = 'Steps: ' + game.data.steps.toString();
-          this.topSteps= 'Higher Step: ' + me.save.topSteps.toString();
+          this.font = new me.Font('gamefont', 40, '#edd23d', 'left');
+          this.steps = 'Burgers: ' + game.data.steps.toString();
+          this.topSteps= 'Max Burgers: ' + me.save.topSteps.toString();
       },
 
       update: function () {
