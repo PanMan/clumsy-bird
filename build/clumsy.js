@@ -1,3 +1,4 @@
+
 var game = {
   data: {
     score : 0,
@@ -19,6 +20,11 @@ var game = {
   },
 
   "loaded": function() {
+    console.log('Loaded');
+    me.event.subscribe("LOADER_COMPLETE", function (){
+  console.log("LOADER_COMPLETE");
+});
+
     me.state.set(me.state.MENU, new game.TitleScreen());
     me.state.set(me.state.PLAY, new game.PlayScreen());
     me.state.set(me.state.GAME_OVER, new game.GameOverScreen());
@@ -61,10 +67,10 @@ var BirdEntity = me.ObjectEntity.extend({
   init: function(x, y) {
     var settings = {};
     settings.image = me.loader.getImage('clumsy');
-    settings.width = 85;
-    settings.height = 60;
-    settings.spritewidth = 85;
-    settings.spriteheight= 60;
+    settings.width = 264;
+    settings.height = 186;
+    settings.spritewidth = 264;
+    settings.spriteheight= 186;
 
     this.parent(x, y, settings);
     this.alwaysUpdate = true;
@@ -77,7 +83,8 @@ var BirdEntity = me.ObjectEntity.extend({
     this.renderable.setCurrentAnimation("flying");
     this.animationController = 0;
     // manually add a rectangular collision shape
-    this.addShape(new me.Rect(new me.Vector2d(5, 5), 70, 50));
+    //this.addShape(new me.Rect(new me.Vector2d(5, 5), 70, 50));
+    this.addShape(new me.Rect(new me.Vector2d(5, 5), 164, 186));
 
     // a tween object for the flying physic effect
     this.flyTween = new me.Tween(this.pos);
@@ -201,10 +208,10 @@ var HitEntity = me.ObjectEntity.extend({
   init: function(x, y) {
     var settings = {};
     settings.image = me.loader.getImage('hit');
-    settings.width = 30;//148;
-    settings.height= 30; //60;
-    settings.spritewidth =  30;//148;
-    settings.spriteheight= 30;//60;
+    settings.width = 128;//148;
+    settings.height= 128; //60;
+    settings.spritewidth =  128;//148;
+    settings.spriteheight= 128;//60;
 
     this.parent(x, y, settings);
     this.alwaysUpdate = true;
@@ -330,11 +337,12 @@ var BackgroundLayer = me.ImageLayer.extend({
   init: function(image, z, speed) {
     name = image;
     width = 900;
-    height = 600;
+    height =  600;//600;
     ratio = 1;
     this.pos.x=0;
     this.fixed = speed > 0 ? false : true;
     this.accel = new me.Vector2d(2, 0);
+    //this.repeat = 'no-repeat';
     //console.log('Fixed:'+this.fixed);
     // call parent constructor
 
@@ -419,6 +427,9 @@ game.TitleScreen = me.ScreenObject.extend({
   },
 
   onResetEvent: function() {
+    console.log('TitleScreen Reset');
+    //Hide loading
+    document.getElementById('loadingscreen').style.display = 'none';
     me.audio.stop("theme");
     game.data.newHiScore = false;
     me.game.world.addChild(new BackgroundLayer('bg', 1,2));
@@ -485,6 +496,10 @@ game.PlayScreen = me.ScreenObject.extend({
     var vol = me.device.ua.contains("Firefox") ? 0.3 : 0.5;
     me.audio.setVolume(vol);
     this.parent(this);
+    //console.log('Game Init');
+    //Hide loading screen
+     
+   
   },
 
   onResetEvent: function() {
@@ -652,3 +667,6 @@ game.GameOverScreen = me.ScreenObject.extend({
     me.audio.stop("theme");
   }
 });
+
+
+
