@@ -1,4 +1,6 @@
 
+//me.sys.fps = 30;
+
 var game = {
   data: {
     score : 0,
