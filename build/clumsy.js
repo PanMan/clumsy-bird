@@ -45,7 +45,7 @@ game.resources = [
 
 	 {name: "bg", type:"image", src: "data/img/bg.png"},
 	 {name: "clumsy", type:"image", src: "data/img/clumsy.png"},
-	 {name: "pipe", type:"image", src: "data/img/pipe.png"},
+	 //{name: "pipe", type:"image", src: "data/img/pipe.png"},
 	 {name: "logo", type:"image", src: "data/img/logo.png"},
 	 {name: "ground", type:"image", src: "data/img/ground.png"},
 	 {name: "gameover", type:"image", src: "data/img/gameover.png"},
@@ -59,7 +59,7 @@ game.resources = [
 
 	
 	 {name: "theme", type: "audio", src: "data/bgm/"},
-	 {name: "hit", type: "audio", src: "data/sfx/"},
+	 {name: "eat", type: "audio", src: "data/sfx/"},
 	 {name: "lose", type: "audio", src: "data/sfx/"},
 ];
 var BirdEntity = me.ObjectEntity.extend({
@@ -126,7 +126,7 @@ var BirdEntity = me.ObjectEntity.extend({
       // give the time in ms since last frame
       // use it instead ?
       game.data.steps++;
-      me.audio.play('hit');
+      me.audio.play('eat');
 
     } else {
       var hitGround = me.game.viewport.height - (50 + 60); //(96 + 60);
