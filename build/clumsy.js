@@ -403,7 +403,7 @@ var Share = me.GUI_Object.extend({
           shareText
        ),
        link: url,
-       picture: 'http://burgerfest.nl/data/img/clumsy.png'
+       picture: 'http://burgerfest.nl/data/img/hamburger.png'
       }
     );
     return false;
