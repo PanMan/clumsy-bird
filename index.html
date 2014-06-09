@@ -105,10 +105,18 @@
     });
 
 
+String.prototype.repeat = function( num )
+{
+    return new Array( num + 1 ).join( this );
+}
+
+//alert( "string to repeat\n".repeat( 4 ) );
+
 var loaddiv = document.getElementById('loadlogo');
 var handle = me.event.subscribe(me.event.LOADER_PROGRESS, function (e){
-  console.log('Loader: '+e);
-  loaddiv.innerHTML = loaddiv.innerHTML + '&marker; ';
+  //console.log('Loader: '+e);
+  //loaddiv.innerHTML = loaddiv.innerHTML + '&marker; ';
+  loaddiv.innerHTML =   '&marker; '.repeat(e*10);
 
 });
     </script>
