@@ -35,7 +35,7 @@ var game = {
     me.input.bindTouch(me.input.KEY.SPACE);
 
     me.pool.register("clumsy", BirdEntity);
-    //me.pool.register("pipe", PipeEntity, true);
+    me.pool.register("pipe", PipeEntity, true);
     me.pool.register("hit", HitEntity, true);
 
     // in melonJS 1.0.0, viewport size is set to Infinity by default
@@ -48,7 +48,7 @@ game.resources = [
 
 	 {name: "bg", type:"image", src: "data/img/bg.png"},
 	 {name: "clumsy", type:"image", src: "data/img/clumsy.png"},
-	 //{name: "pipe", type:"image", src: "data/img/pipe.png"},
+	 {name: "pipe", type:"image", src: "data/img/pipe.png"},
 	 {name: "logo", type:"image", src: "data/img/logo.png"},
 	 {name: "ground", type:"image", src: "data/img/ground.png"},
 	 {name: "gameover", type:"image", src: "data/img/gameover.png"},
@@ -63,7 +63,7 @@ game.resources = [
 	
 	 {name: "theme", type: "audio", src: "data/bgm/"},
 	 //{name: "eat", type: "audio", src: "data/sfx/"},
-	 {name: "lose", type: "audio", src: "data/sfx/"},
+	 {name: "lose", type: "audio", src: "data/sfx/"}
 ];
 
 
@@ -150,11 +150,11 @@ var BirdEntity = me.ObjectEntity.extend({
 
     return this.parent(dt);
 
-  },
+  }
 
 });
 
-/*
+
 var PipeEntity = me.ObjectEntity.extend({
   init: function(x, y) {
     var settings = {};
@@ -181,7 +181,7 @@ var PipeEntity = me.ObjectEntity.extend({
   },
 
 });
-*/
+
 
 var hitfreq=92;
 
@@ -191,7 +191,8 @@ var PipeGenerator = me.Renderable.extend({
     this.alwaysUpdate = true;
     this.generate = 0;
     //this.pipeFrequency = 92;
-    this.pipeHoleSize = 1240;
+    //this.pipeHoleSize = 1240;
+    this.pipeHoleSize = 1640;
     this.posX = me.game.viewport.width;
   },
 
@@ -202,18 +203,23 @@ var PipeGenerator = me.Renderable.extend({
           me.video.getHeight() - 100,
           200
       );
-      //var posY2 = posY - me.video.getHeight() - this.pipeHoleSize;
-      //var pipe1 = new me.pool.pull("pipe", this.posX, posY);
-      //var pipe2 = new me.pool.pull("pipe", this.posX, posY2);
-      var hitPos = posY - 100;
-      var hit = new me.pool.pull("hit", this.posX, hitPos);
-      //pipe1.renderable.flipY();
-      //me.game.world.addChild(pipe1, 10);
-      //me.game.world.addChild(pipe2, 10);
+      if (this.generate>100){
+      var posY2 = posY - me.video.getHeight() - this.pipeHoleSize;
+      var pipe1 = new me.pool.pull("pipe", this.posX, posY);
+      var pipe2 = new me.pool.pull("pipe", this.posX, posY2);
+      pipe1.renderable.flipY();
+      me.game.world.addChild(pipe1, 10);
+      me.game.world.addChild(pipe2, 10);
+
+    }
+    //Add burger
+    var hitPos = posY - 100;
+    var hit = new me.pool.pull("hit", this.posX, hitPos);
+     
       me.game.world.addChild(hit, 11);
     }
     return true;
-  },
+  }
 
 });
 
@@ -244,7 +250,7 @@ var HitEntity = me.ObjectEntity.extend({
       //me.state.change(me.state.GAME_OVER); //Dead on missed burger
     }
     return true;
-  },
+  }
 
 });
 
@@ -269,7 +275,7 @@ var Ground = me.ObjectEntity.extend({
       this.pos.x = me.video.getWidth() - 10;
     }
     return true;
-  },
+  }
 
 });
 
