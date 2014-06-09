@@ -113,10 +113,12 @@ String.prototype.repeat = function( num )
 //alert( "string to repeat\n".repeat( 4 ) );
 
 var loaddiv = document.getElementById('loadlogo');
+var loadcount=1;
 var handle = me.event.subscribe(me.event.LOADER_PROGRESS, function (e){
   //console.log('Loader: '+e);
   //loaddiv.innerHTML = loaddiv.innerHTML + '&marker; ';
-  loaddiv.innerHTML =   '&marker; '.repeat(e*10);
+  loadcount=Math.round(e*10);
+  loaddiv.innerHTML =   '&marker; '.repeat(loadcount);
 
 });
     </script>
