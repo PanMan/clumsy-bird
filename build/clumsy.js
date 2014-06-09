@@ -444,7 +444,7 @@ game.TitleScreen = me.ScreenObject.extend({
   onResetEvent: function() {
     //console.log('TitleScreen Reset');
     //Hide loading
-    document.getElementById('loadingscreen').style.display = 'none';
+    //document.getElementById('loadingscreen').style.display = 'none';
     me.audio.stop("theme");
     game.data.newHiScore = false;
     me.game.world.addChild(new BackgroundLayer('bg', 1,2));
