@@ -62,9 +62,15 @@ game.resources = [
 
 	
 	 {name: "theme", type: "audio", src: "data/bgm/"},
-	 {name: "eat", type: "audio", src: "data/sfx/"},
+	 //{name: "eat", type: "audio", src: "data/sfx/"},
 	 {name: "lose", type: "audio", src: "data/sfx/"},
 ];
+
+
+if (!me.device.isMobile) {
+  game.resources.push({name: "eat", type: "audio", src: "data/sfx/"});
+}
+
 var BirdEntity = me.ObjectEntity.extend({
   init: function(x, y) {
     var settings = {};
