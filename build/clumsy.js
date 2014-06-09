@@ -505,7 +505,7 @@ game.TitleScreen = me.ScreenObject.extend({
       // unregister the event
     me.event.unsubscribe(this.handler);
     me.input.unbindKey(me.input.KEY.ENTER);
-        me.input.unbindKey(me.input.KEY.SPACE);
+    me.input.unbindKey(me.input.KEY.SPACE);
     me.input.unbindMouse(me.input.mouse.LEFT);
     me.game.world.removeChild(this.ground);
   }
