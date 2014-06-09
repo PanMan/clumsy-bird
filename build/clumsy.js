@@ -241,6 +241,7 @@ var HitEntity = me.ObjectEntity.extend({
     this.pos.add(this.ac);
     if (this.pos.x < -148) {
       me.game.world.removeChild(this);
+      //me.state.change(me.state.GAME_OVER); //Dead on missed burger
     }
     return true;
   },
@@ -520,8 +521,6 @@ game.PlayScreen = me.ScreenObject.extend({
     this.parent(this);
     //console.log('Game Init');
     //Hide loading screen
-     
-   
   },
 
   onResetEvent: function() {
@@ -594,8 +593,12 @@ game.GameOverScreen = me.ScreenObject.extend({
       game.data.newHiScore = true;
     }
     me.input.bindKey(me.input.KEY.ENTER, "enter", true);
-    me.input.bindKey(me.input.KEY.SPACE, "enter", false)
-    me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.ENTER);
+
+    //Disable space and leftmouse for 1 sec
+    me.timer.setTimeout(function(){
+      me.input.bindKey(me.input.KEY.SPACE, "enter", false)
+      me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.ENTER);
+    }, 1000, false);
 
     this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge) {
         if (action === "enter") {
