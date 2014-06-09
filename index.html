@@ -103,6 +103,14 @@
     //  alert('Konami code!')
       hitfreq=40;
     });
+
+
+var loaddiv = document.getElementById('loadlogo');
+var handle = me.event.subscribe(me.event.LOADER_PROGRESS, function (e){
+  //console.log('Loader: '+e);
+  loaddiv.innerHTML = loaddiv.innerHTML + '. ';
+
+});
     </script>
 
 
