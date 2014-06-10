@@ -89,7 +89,7 @@ var BirdEntity = me.ObjectEntity.extend({
     this.animationController = 0;
     // manually add a rectangular collision shape
     //this.addShape(new me.Rect(new me.Vector2d(5, 5), 70, 50));
-    this.addShape(new me.Rect(new me.Vector2d(30, 0), 95, 100));
+    this.addShape(new me.Rect(new me.Vector2d(10, 0), 85, 100));
 
     // a tween object for the flying physic effect
     this.flyTween = new me.Tween(this.pos);
@@ -200,7 +200,7 @@ var PipeGenerator = me.Renderable.extend({
           me.video.getHeight() - 100,
           200
       );
-      if (this.generate>2000){
+      if (this.generate>736){
       var posY2 = posY - me.video.getHeight() - this.pipeHoleSize;
       var pipe1 = new me.pool.pull("pipe", this.posX, posY);
       var pipe2 = new me.pool.pull("pipe", this.posX, posY2);
