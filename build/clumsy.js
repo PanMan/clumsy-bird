@@ -23,7 +23,7 @@ var game = {
 
   "loaded": function() {
     //console.log('Loaded');
-    //me.plugin.register(debugPanel, "debug"); //OWN
+    me.plugin.register(debugPanel, "debug"); //OWN
     me.state.set(me.state.MENU, new game.TitleScreen());
     me.state.set(me.state.PLAY, new game.PlayScreen());
     me.state.set(me.state.GAME_OVER, new game.GameOverScreen());
@@ -89,7 +89,7 @@ var BirdEntity = me.ObjectEntity.extend({
     this.animationController = 0;
     // manually add a rectangular collision shape
     //this.addShape(new me.Rect(new me.Vector2d(5, 5), 70, 50));
-    this.addShape(new me.Rect(new me.Vector2d(0, 0), 125, 100));
+    this.addShape(new me.Rect(new me.Vector2d(30, 0), 95, 100));
 
     // a tween object for the flying physic effect
     this.flyTween = new me.Tween(this.pos);
@@ -156,9 +156,9 @@ var PipeEntity = me.ObjectEntity.extend({
   init: function(x, y) {
     var settings = {};
     settings.image = me.loader.getImage('pipe');
-    settings.width = 148;
+    settings.width = 112;
     settings.height= 1664;
-    settings.spritewidth = 148;
+    settings.spritewidth = 112;
     settings.spriteheight= 1664;
 
 
@@ -189,7 +189,7 @@ var PipeGenerator = me.Renderable.extend({
     this.generate = 0;
     //this.pipeFrequency = 92;
     //this.pipeHoleSize = 1240;
-    this.pipeHoleSize = 1640;
+    this.pipeHoleSize = 1340;
     this.posX = me.game.viewport.width;
   },
 
@@ -200,7 +200,7 @@ var PipeGenerator = me.Renderable.extend({
           me.video.getHeight() - 100,
           200
       );
-      if (this.generate>100){
+      if (this.generate>2000){
       var posY2 = posY - me.video.getHeight() - this.pipeHoleSize;
       var pipe1 = new me.pool.pull("pipe", this.posX, posY);
       var pipe2 = new me.pool.pull("pipe", this.posX, posY2);
