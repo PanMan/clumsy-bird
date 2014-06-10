@@ -131,6 +131,7 @@ var BirdEntity = me.ObjectEntity.extend({
       // use it instead ?
       game.data.steps++;
       me.audio.play('eat');
+      ga('send', 'event', 'eat', 'burger');
 
     } else {
       var hitGround = me.game.viewport.height - (50 + 60); //(96 + 60);
@@ -198,14 +199,13 @@ var PipeGenerator = me.Renderable.extend({
           me.video.getHeight() - 100,
           200
       );
-      if (this.generate>736){
-      var posY2 = posY - me.video.getHeight() - this.pipeHoleSize;
-      var pipe1 = new me.pool.pull("pipe", this.posX, posY);
-      var pipe2 = new me.pool.pull("pipe", this.posX, posY2);
-      pipe1.renderable.flipY();
-      me.game.world.addChild(pipe1, 10);
-      me.game.world.addChild(pipe2, 10);
-
+      if (this.generate>736){ //Add forks
+        var posY2 = posY - me.video.getHeight() - this.pipeHoleSize;
+        var pipe1 = new me.pool.pull("pipe", this.posX, posY);
+        var pipe2 = new me.pool.pull("pipe", this.posX, posY2);
+        pipe1.renderable.flipY();
+        me.game.world.addChild(pipe1, 10);
+        me.game.world.addChild(pipe2, 10);
     }
     //Add burger
     var hitPos = posY - 100;
