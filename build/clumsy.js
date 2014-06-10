@@ -23,7 +23,7 @@ var game = {
 
   "loaded": function() {
     //console.log('Loaded');
-    me.plugin.register(debugPanel, "debug"); //OWN
+    //me.plugin.register(debugPanel, "debug"); //OWN
     me.state.set(me.state.MENU, new game.TitleScreen());
     me.state.set(me.state.PLAY, new game.PlayScreen());
     me.state.set(me.state.GAME_OVER, new game.GameOverScreen());
@@ -56,8 +56,6 @@ game.resources = [
 	 {name: "new", type:"image", src: "data/img/new.png"},
 	 {name: "share", type:"image", src: "data/img/share.png"},
 	 {name: "tweet", type:"image", src: "data/img/tweet.png"},
-
-	
 	 {name: "theme", type: "audio", src: "data/bgm/"},
 	 //{name: "eat", type: "audio", src: "data/sfx/"},
 	 {name: "lose", type: "audio", src: "data/sfx/"}
@@ -89,7 +87,7 @@ var BirdEntity = me.ObjectEntity.extend({
     this.animationController = 0;
     // manually add a rectangular collision shape
     //this.addShape(new me.Rect(new me.Vector2d(5, 5), 70, 50));
-    this.addShape(new me.Rect(new me.Vector2d(10, 0), 85, 100));
+    this.addShape(new me.Rect(new me.Vector2d(40, 10), 85, 90));
 
     // a tween object for the flying physic effect
     this.flyTween = new me.Tween(this.pos);
