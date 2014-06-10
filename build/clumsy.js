@@ -131,7 +131,6 @@ var BirdEntity = me.ObjectEntity.extend({
       // use it instead ?
       game.data.steps++;
       me.audio.play('eat');
-      ga('send', 'event', 'eat', 'burger');
 
     } else {
       var hitGround = me.game.viewport.height - (50 + 60); //(96 + 60);
@@ -655,6 +654,7 @@ game.GameOverScreen = me.ScreenObject.extend({
           this.font = new me.Font('gamefont', 40, '#edd23d', 'left');
           this.steps = 'Burgers: ' + game.data.steps.toString();
           this.topSteps= 'Max Burgers: ' + me.save.topSteps.toString();
+          ga('send', 'event', 'burger', 'eat', 'burgers', game.data.steps);
       },
 
       update: function () {
