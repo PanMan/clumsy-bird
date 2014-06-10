@@ -1,8 +1,5 @@
 
 //me.sys.fps = 30;
-
-
-
 //me.debug.displayFPS = true; 
 var game = {
   data: {
