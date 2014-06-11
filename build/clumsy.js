@@ -208,7 +208,7 @@ var PipeGenerator = me.Renderable.extend({
     }
     //Add burger
     var hitPos = posY - 100;
-    var hit = new me.pool.pull("hit", this.posX-10, hitPos);
+    var hit = new me.pool.pull("hit", this.posX-10, hitPos); //-10 is burger correction to left
      
       me.game.world.addChild(hit, 11);
     }
