@@ -407,7 +407,7 @@ var Share = me.GUI_Object.extend({
     FB.ui(
       {
        method: 'feed',
-       name: 'Burgerfest',
+       name: 'Czar Burgerfest',
        caption: "Share to your friends",
        description: (
           shareText
