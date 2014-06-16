@@ -23,7 +23,7 @@ var game = {
 
   "loaded": function() {
     //console.log('Loaded');
-    //me.plugin.register(debugPanel, "debug"); //OWN
+    me.plugin.register(debugPanel, "debug"); //OWN
     me.state.set(me.state.MENU, new game.TitleScreen());
     me.state.set(me.state.PLAY, new game.PlayScreen());
     me.state.set(me.state.GAME_OVER, new game.GameOverScreen());
@@ -401,7 +401,7 @@ var Share = me.GUI_Object.extend({
   },
 
   onClick: function(event) {
-    var shareText ='Just ate ' + game.data.steps + ' burgers on Burgerfest! Got the munchies? Play the burger game';
+    var shareText ='Just ate ' + game.data.steps + ' burgers on Czar Burgerfest! Got the munchies? Play the burger game';
      
     var url = 'http://burgerfest.nl/';
     FB.ui(
@@ -433,7 +433,7 @@ var Tweet = me.GUI_Object.extend({
   },
 
   onClick: function(event) {
-    var shareText = 'Just ate ' + game.data.steps + ' burgers on Burgerfest! Got the munchies? Play the burger game';
+    var shareText = 'Just ate ' + game.data.steps + ' burgers on Czar Burgerfest! Got the munchies? Play the burger game';
     //"Just ate" .. "burgers on Burgerfest! Got the munchies? Click for free burgers!
     var url = 'http://burgerfest.nl/';
     var hashtags = 'burgerfest'
@@ -593,6 +593,10 @@ game.GameOverScreen = me.ScreenObject.extend({
       game.data.newHiScore = true;
     }
     me.input.bindKey(me.input.KEY.ENTER, "enter", true);
+    //Send to server
+    if ($){
+      $.post( "highscore.php", { score: game.data.steps } );
+    }
 
     //Disable space and leftmouse for 1 sec
     me.timer.setTimeout(function(){
